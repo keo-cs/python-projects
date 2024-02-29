@@ -1,6 +1,9 @@
 import argparse
 from urllib.parse import urlparse
-import tldextract
+
+from . import tld
+
+tlds = tld.get_online_list()
 
 
 def parse(url: str) -> urlparse:
@@ -45,11 +48,10 @@ def is_ipv4(ip: str) -> bool:
     return True
 
 
-def is_domain(domain: str, failout: bool = False) -> bool:
+def is_domain(domain: str) -> bool:
     # Limit domain length to 64 characters for simplicity
     max_length = 64
     if len(domain) > max_length:
-
         return False
 
     parts = domain.split(".")
@@ -62,8 +64,11 @@ def is_domain(domain: str, failout: bool = False) -> bool:
         return False
 
     def has_valid_tld(domain: str) -> bool:
-        extracted = tldextract.extract(domain)
-        return True if extracted.suffix else False
+        split = domain.split(".")
+        tld = split[-1]
+        if tld not in tlds:
+            return False
+        return True
 
     if not has_valid_tld(domain):
         return False

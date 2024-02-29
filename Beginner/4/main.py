@@ -1,6 +1,6 @@
+import argparse
 import secrets
 import string
-import argparse
 
 
 def echo(*args, **kwargs):

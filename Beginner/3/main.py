@@ -1,5 +1,5 @@
-from urllib.parse import urlparse
 import argparse
+from urllib.parse import urlparse
 
 
 def echo(*args, **kwargs):
