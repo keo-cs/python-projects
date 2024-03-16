@@ -6,6 +6,7 @@
 2. [Malicious Entity OSINT](./Beginner/2/prompt.md)
 3. [URL Defang](./Beginner/3/prompt.md)
 4. [Password Generator](./Beginner/4/prompt.md)
+5. [Rock, Paper, Scissors](./Beginner/5/prompt.md)
 
 ## Intermediate
 
