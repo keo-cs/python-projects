@@ -45,29 +45,29 @@ def generate(
     return password
 
 
-parser = argparse.ArgumentParser(
-    prog="gimme_pw.py",
-    description="Generate a password",
-)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        prog="gimme_pw.py",
+        description="Generate a password",
+    )
 
-parser.add_argument("length", type=int)
-parser.add_argument("-v", "--verbose", action="store_true")
-parser.add_argument("-l", "--no_lowercase", action="store_true")
-parser.add_argument("-u", "--no_uppercase", action="store_true")
-parser.add_argument("-d", "--no_digits", action="store_true")
-parser.add_argument("-s", "--no_special", action="store_true")
+    parser.add_argument("length", type=int)
+    parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument("-l", "--no_lowercase", action="store_true")
+    parser.add_argument("-u", "--no_uppercase", action="store_true")
+    parser.add_argument("-d", "--no_digits", action="store_true")
+    parser.add_argument("-s", "--no_special", action="store_true")
 
-args = parser.parse_args()
+    args = parser.parse_args()
 
-DO_SILENT = not args.verbose
+    DO_SILENT = not args.verbose
 
+    pw = generate(
+        length=args.length,
+        use_lowercase=not args.no_lowercase,
+        use_uppercase=not args.no_uppercase,
+        use_digits=not args.no_digits,
+        use_special_chars=not args.no_special,
+    )
 
-pw = generate(
-    length=args.length,
-    use_lowercase=not args.no_lowercase,
-    use_uppercase=not args.no_uppercase,
-    use_digits=not args.no_digits,
-    use_special_chars=not args.no_special,
-)
-
-print(pw)
+    print(pw)

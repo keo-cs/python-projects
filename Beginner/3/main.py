@@ -18,21 +18,22 @@ def defang(url):
     return defanged_url
 
 
-parser = argparse.ArgumentParser(
-    prog="d_fang.py",
-    description="Defang a URL",
-)
+if __name__ == "__main__":
 
-parser.add_argument("url")
-parser.add_argument("-v", "--verbose", action="store_true")
+    parser = argparse.ArgumentParser(
+        prog="d_fang.py",
+        description="Defang a URL",
+    )
 
-args = parser.parse_args()
+    parser.add_argument("url")
+    parser.add_argument("-v", "--verbose", action="store_true")
 
-DO_SILENT = not args.verbose
+    args = parser.parse_args()
 
+    DO_SILENT = not args.verbose
 
-url = "https://host.domain.com/path/?key=val#id"
-df = defang(url)
+    url = "https://host.domain.com/path/?key=val#id"
+    df = defang(url)
 
-echo("Original URL:", url)
-echo("Defanged URL:", df)
+    echo("Original URL:", url)
+    echo("Defanged URL:", df)

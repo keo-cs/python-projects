@@ -191,35 +191,36 @@ def echo(*args, **kwargs):
         print(*args, **kwargs)
 
 
-parser = argparse.ArgumentParser(
-    prog="what_the.py",
-    description="What the",
-    epilog="What is it?",
-)
+if __name__ == "__main__":
 
-parser.add_argument("value")
-parser.add_argument("-v", "--verbose", action="store_true")
-parser.add_argument("-n", "--allow_none", action="store_true")
-parser.add_argument("-mA", "--allow_multiple", action="store_true")
-parser.add_argument("-mC", "--nested_checks", action="store_true")
-
-args = parser.parse_args()
-
-DO_SILENT = not args.verbose
-
-ioc = args.value
-
-
-tlds = TLD_List.get_online_list()
-
-try:
-    ioc_type = get_ioc_type(
-        ioc,
-        allow_nested_checks=args.nested_checks,
-        allow_none=args.allow_none,
-        allow_multiple_types=args.allow_multiple,
+    parser = argparse.ArgumentParser(
+        prog="what_the.py",
+        description="What the",
+        epilog="What is it?",
     )
-    print(f"IOC Type(s): {ioc_type}")
-except ValueError as e:
-    print(f"Error: {e}")
-    exit(1)
+
+    parser.add_argument("value")
+    parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument("-n", "--allow_none", action="store_true")
+    parser.add_argument("-mA", "--allow_multiple", action="store_true")
+    parser.add_argument("-mC", "--nested_checks", action="store_true")
+
+    args = parser.parse_args()
+
+    DO_SILENT = not args.verbose
+
+    ioc = args.value
+
+    tlds = TLD_List.get_online_list()
+
+    try:
+        ioc_type = get_ioc_type(
+            ioc,
+            allow_nested_checks=args.nested_checks,
+            allow_none=args.allow_none,
+            allow_multiple_types=args.allow_multiple,
+        )
+        print(f"IOC Type(s): {ioc_type}")
+    except ValueError as e:
+        print(f"Error: {e}")
+        exit(1)

@@ -44,11 +44,13 @@ def make_valid(url: str, replace_any_domain: bool = False) -> str:
     return parsed.geturl()
 
 
-while True:
-    r = input("\nEnter a URL: ")
-    if r == "exit":
-        break
+if __name__ == "__main__":
 
-    r = make_valid(r)
-    if r:
-        print(r)
+    while True:
+        r = input("\nEnter a URL: ")
+        if r == "exit":
+            break
+
+        r = make_valid(r)
+        if r:
+            print(r)
