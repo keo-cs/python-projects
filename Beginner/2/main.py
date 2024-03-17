@@ -2,7 +2,7 @@ import argparse
 from urllib.parse import urlparse
 from dataclasses import dataclass
 from pathlib import Path
-import requests
+from urllib.request import urlopen
 
 
 @dataclass
@@ -39,8 +39,15 @@ class TLD_List:
 
     @staticmethod
     def get_online_list() -> list[str]:
-        r = requests.get("https://data.iana.org/TLD/tlds-alpha-by-domain.txt")
-        r = r.text.split("\n")
+        # r = requests.get("https://data.iana.org/TLD/tlds-alpha-by-domain.txt")
+        # r = r.text.split("\n")
+
+        r = (
+            urlopen("https://data.iana.org/TLD/tlds-alpha-by-domain.txt")
+            .read()
+            .decode("utf-8")
+            .split("\n")
+        )
 
         return TLD_List(tld_list=r).clean()
 
